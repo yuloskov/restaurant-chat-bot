@@ -56,7 +56,7 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 
-def start(update: Update, context: CallbackContext) -> None:
+def start(update: Update, context: CallbackContext) -> str:
     """A function to start the messaging."""
     text = 'Добро пожаловать в бот для бронирования столиков в ресторане!'
 
@@ -69,7 +69,7 @@ def start(update: Update, context: CallbackContext) -> None:
     return select_action(update, context)
 
 
-def select_action(update: Update, context: CallbackContext) -> None:
+def select_action(update: Update, context: CallbackContext) -> str:
     """A function to select the appropriate action."""
     # Buttons to reply with
     buttons = [
@@ -107,7 +107,7 @@ def select_action(update: Update, context: CallbackContext) -> None:
     return SELECTING_ACTION
 
 
-def show_data(update: Update, context: CallbackContext) -> None:
+def show_data(update: Update, context: CallbackContext) -> str:
     """A function to show the booking data to user."""
     user_data = context.user_data
     user_data[START_OVER] = False
@@ -135,13 +135,13 @@ def show_data(update: Update, context: CallbackContext) -> None:
     return SHOWING
 
 
-def cancel_booking(update: Update, context: CallbackContext) -> None:
+def cancel_booking(update: Update, context: CallbackContext) -> str:
     """A function to go back to selecting action from booking dialog."""
     select_action(update, context)
     return RETURNING
 
 
-def end(update: Update, context: CallbackContext) -> None:
+def end(update: Update, context: CallbackContext) -> str:
     """Function to end the dialog with."""
     context.user_data[START_OVER] = True
     # Answer on user request
@@ -153,7 +153,7 @@ def end(update: Update, context: CallbackContext) -> None:
     return END
 
 
-def main():
+def main() -> None:
     """Main function of the app. It describes the dialog."""
     # Register the API key
     updater = Updater(os.environ.get('API_KEY'))

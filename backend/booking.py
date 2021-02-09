@@ -34,7 +34,7 @@ def _print_data(update: Update, user_data: dict) -> None:
         update.message.reply_text(text=text)
 
 
-def select_table_features(update: Update, context: CallbackContext) -> None:
+def select_table_features(update: Update, context: CallbackContext) -> str:
     """A handler for selecting table features."""
     # Buttons in selecting table features menu
     buttons = [
@@ -93,7 +93,7 @@ def select_table_features(update: Update, context: CallbackContext) -> None:
     return SELECTING_FEATURE
 
 
-def ask_for_input(update: Update, context: CallbackContext) -> None:
+def ask_for_input(update: Update, context: CallbackContext) -> str:
     """Handle user input."""
     cur_feature = update.callback_query.data
     context.user_data[CURRENT_FEATURE] = cur_feature
@@ -123,7 +123,7 @@ def _check_data_correctness(cur_feature: str, data: str) -> bool:
         raise Exception('Incorrect feature')
 
 
-def save_input(update: Update, context: CallbackContext) -> None:
+def save_input(update: Update, context: CallbackContext) -> str:
     """Save the user data to the context."""
     user_data = context.user_data
 
@@ -147,7 +147,7 @@ def save_input(update: Update, context: CallbackContext) -> None:
     return select_table_features(update, context)
 
 
-def end_booking(update: Update, context: CallbackContext) -> None:
+def end_booking(update: Update, context: CallbackContext) -> str:
     """End booking handler."""
     user_data = context.user_data
 
